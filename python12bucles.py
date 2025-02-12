@@ -11,3 +11,9 @@ while (contador <= 5):
 # DEBEMOS INDICAR QUE SALDREMOS DEL BUCLE
     contador = contador +1
 print("Fin del programa")
+# BUCLE FOR
+for i in range(5):
+    print("Valor de i", i)
+for i in range(1,6):
+    print("Valor de i", i)
+    
