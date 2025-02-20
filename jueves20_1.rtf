@@ -1,0 +1,235 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2820
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 select * from EMP;\
+select * from DEPT;\
+select DEPT_NO, LOC from DEPT;\
+select * from EMP order by APELLIDO asc;\
+select * from EMP order by APELLIDO desc;\
+select * from EMP where DEPT_NO = 10;\
+select * from EMP where OFICIO = 'DIRECTOR';\
+select * from EMP where DEPT_NO = 10 or DEPT_NO=20;\
+\
+	SELECT * FROM PLANTILLA\
+WHERE HOSPITAL_COD IN (45, 22, 19, 90, 14, 60)\
+\
+\
+SELECT DISTINCT OFICIO FROM EMP;\
+\
+select * from EMP;\
+\
+select apellido, oficio, salario from EMP where comision > 100000;\
+\
+select apellido, oficio, salario from EMP where (salario + comision)*12 AS "TOTAL" > 750000;\
+\
+select apellido, oficio, (salario*14) + comision AS "TOTAL" from EMP where (salario*14) + comision > 750000;\
+\
+select apellido, oficio, salario from EMP where (salario + comision)*12 > 1000000;\
+\
+select * from EMP order by DEPT_NO, oficio;\
+\
+select * from enfermo where FECHA_NAC < '01-01-1970' order by INSCRIPCION;\
+\
+select * from PLANTILLA;\
+ \
+\
+select * from PLANTILLA where TURNO = 'M';\
+\
+select * from PLANTILLA where TURNO = 'N';\
+\
+select * from PLANTILLA where FUNCION = 'DOCTOR' and SALARIO > 3000000;\
+\
+select count(*) as PERSONAS, OFICIO from EMP group by OFICIO;\
+\
+select count(*) as "NUMERO", sum(salario) as "SUMA" from emp;\
+\
+select count (*) as PERSONAS, oficio, avg(salario) as MEDIA from emp group by oficio having oficio = 'ANALISTA'; \
+\
+select funcion, count(*) from PLANTILLA where funcion = 'ENFERMERO' or funcion = 'ENFERMERA' or funcion = 'INTERINO'\
+group by FUNCION;\
+\
+select distinct NOMBRE from SALA;\
+\
+select NOMBRE, round(avg(NUM_CAMA)) as MEDIA_CAMAS from SALA where \
+NOMBRE IN (select distinct NOMBRE from SALA) group by NOMBRE;\
+\
+select FUNCION, round(avg(SALARIO)) AS SALARIO_MEDIO from PLANTILLA where SALA_COD = '6' group by FUNCION;\
+\
+\
+select * from DEPT;\
+select EMP.APELLIDO, EMP.OFICIO\
+, DEPT.DNOMBRE, DEPT.LOC\
+from EMP\
+inner join DEPT\
+on EMP.DEPT_NO=DEPT.DEPT_NO;\
+\
+\
+select * from HOSPITAL;\
+select PLANTILLA.APELLIDO, PLANTILLA.FUNCION\
+, HOSPITAL.NOMBRE\
+from PLANTILLA\
+inner join HOSPITAL\
+on PLANTILLA.HOSPITAL_COD=HOSPITAL.HOSPITAL_COD;\
+\
+\
+-- \
+\
+select * from DEPT;\
+select EMP.APELLIDO, EMP.OFICIO\
+, DEPT.DNOMBRE, DEPT.LOC\
+from EMP\
+full join DEPT\
+on EMP.DEPT_NO=DEPT.DEPT_NO;\
+\
+\
+\
+\
+select * from DEPT;\
+select EMP.APELLIDO, EMP.OFICIO\
+, DEPT.DNOMBRE, DEPT.LOC\
+from EMP\
+cross join DEPT;\
+\
+select * from DOCTOR;\
+select * from HOSPITAL;\
+\
+select DOCTOR.APELLIDO, DOCTOR.SALARIO, DOCTOR.ESPECIALIDAD,\
+HOSPITAL.DIRECCION\
+from DOCTOR\
+inner join HOSPITAL\
+on DOCTOR.HOSPITAL_COD=HOSPITAL.HOSPITAL_COD\
+where HOSPITAL.NOMBRE = 'la paz';\
+\
+\
+select count(EMP.EMP_NO ) as EMPLEADOS, DEPT.DNOMBRE\
+from EMP\
+right join DEPT\
+on EMP.DEPT_NO=DEPT.DEPT_NO\
+group by DEPT.DNOMBRE;\
+\
+select * from EMP;\
+select max(salario) from EMP;\
+\
+\
+select * from EMP\
+where salario=(select min(salario)from EMP);\
+\
+\
+\
+\
+select * from EMP;\
+\
+select * from EMP where oficio=(\
+select oficio from EMP where apellido = 'sala') and\
+salario > (select salario from EMP where apellido = 'ford');\
+\
+\
+\
+select * from EMP where oficio=(\
+select oficio from EMP where apellido = 'sala' or apellido = 'jimenez');\
+\
+\
+select * from EMP where apellido = 'jimenez';\
+select oficio from EMP where apellido = 'sala' or apellido = 'jimenez';\
+\
+select * from EMP where oficio IN (\
+select oficio from EMP where apellido = 'sala' or apellido = 'jimenez');\
+\
+\
+select APELLIDO, OFICIO, SALARIO FROm EMP\
+union all\
+select APELLIDO, OFICIO, SALARIO FROm EMP;\
+\
+\
+\
+---ejercicios mi\'e9rcoles\
+\
+select * from PLANTILLA;\
+select * from DEPT;\
+-----------------1--------------------------\
+select EMP.apellido, EMP.oficio, EMP.salario\
+, DEPT.DEPT_NO, DEPT.DNOMBRE from EMP\
+inner join DEPT\
+on EMP.DEPT_NO=DEPT.DEPT_NO\
+where SALARIO > 300000;\
+-------------------1------------------------\
+\
+select * from HOSPITAL;\
+select * from SALA;\
+-------------------2------------------------\
+select SALA.NOMBRE as NOMBRESALA, HOSPITAL.NOMBRE as NOMBREHOSPITAL\
+from SALA\
+inner join HOSPITAL\
+on SALA.HOSPITAL_COD=HOSPITAL.HOSPITAL_COD;\
+-------------------2------------------------\
+select * from EMP;\
+select * from DEPT;\
+-------------------3------------------------\
+select count(*) as EMPLEADOS, DEPT.LOC as CIUDAD\
+from EMP\
+right join DEPT\
+on EMP.DEPT_NO=DEPT.DEPT_NO\
+group by DEPT.LOC;\
+-------------------3------------------------\
+\
+-------------------4------------------------\
+select DEPT.DNOMBRE as DEPARTAMENTO, count(*) as PERSONAS\
+, EMP.OFICIO as OFICIO\
+from EMP\
+right join DEPT\
+on EMP.DEPT_NO=DEPT.DEPT_NO\
+group by DEPT.DNOMBRE, EMP.OFICIO;\
+\
+-------------------4------------------------\
+\
+select * from SALA;\
+select * from HOSPITAL;\
+\
+select count(*) as NUMEROSALAS, SALA.NOMBRE as SALA , HOSPITAL.NOMBRE as HOSPITAL\
+from SALA\
+inner join HOSPITAL\
+on SALA.HOSPITAL_COD=HOSPITAL.HOSPITAL_COD\
+group by SALA.NOMBRE, HOSPITAL.NOMBRE;\
+\
+\
+\
+\
+\
+----------JUEVES 20\
+\
+select * from DEPT;\
+\
+insert into DEPT values (50, 'PYTHON', 'GETAFE');\
+insert into DEPT (DEPT_NO, DNOMBRE) values (60, 'SOBORNOS');\
+\
+\
+\
+\
+select * from PLANTILLA\
+order by EMPLEADO_NO;\
+\
+select max(EMPLEADO_NO) from PLANTILLA;\
+\
+insert into PLANTILLA (EMPLEADO_NO, APELLIDO, FUNCION, TURNO, HOSPITAL_COD) values\
+((select max(EMPLEADO_NO) +1 from PLANTILLA), 'Lopez', 'ENFERMERA', 'T', 22);\
+\
+\
+\
+--NUEVO REGISTRO: Apellido: cabrales, sala 4, ENFERMERA, turno M , hospital "El Carmen")\
+--Despues Eliminar las personas SIN hospital\
+\
+select * from HOSPITAL;\
+insert into PLANTILLA (EMPLEADO_NO, APELLIDO, FUNCION, TURNO, SALA_COD, HOSPITAL_COD) values\
+((select max(EMPLEADO_NO) +1 from PLANTILLA), 'Cabrales', 'ENFERMERA', 'M', 4, (select HOSPITAL_COD\
+from HOSPITAL where NOMBRE = 'El Carmen'));\
+\
+\
+delete from PLANTILLA where HOSPITAL_COD not in (select HOSPITAL_COD from HOSPITAL); -- NO LA BORRA PORQUE (NULL) NO ES UN VALOR\
+\
+delete from PLANTILLA where HOSPITAL_COD not in (select HOSPITAL_COD from HOSPITAL) or HOSPITAL_COD is null;\
+\
+select HOSPITAL_COD from HOSPITAL;}
