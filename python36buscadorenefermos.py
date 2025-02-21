@@ -4,15 +4,11 @@
 
 import oracledb
 
-connection = oracledb.connect(user='SYSTEM', password='oracle', dsn='localhost/xe')
-
-print("Conectados!!!")
 print("Introduzca número de inscripcion")
 data = input() # Lo cogemos como texto, para pasárselo al string de la consulta sql
-
-
-cursor = connection.cursor()
 sql = "select * from ENFERMO where inscripcion=" + data
+connection = oracledb.connect(user='SYSTEM', password='oracle', dsn='localhost/xe')
+cursor = connection.cursor()
 cursor.execute(sql)
 
 # Como estamos buscando por Primary key
