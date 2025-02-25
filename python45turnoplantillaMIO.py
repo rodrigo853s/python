@@ -8,14 +8,7 @@ import oracledb
 
 connection = oracledb.connect(user='SYSTEM', password='oracle', dsn='localhost/xe')
 print("----Buscador TURNOS plantilla---")
-sqlturnos = """
-    select distinct TURNO, case TURNO
-    when 'T' then 'TARDE'
-    when 'M' then 'MAÑANA'
-    else 'NOCHE'
-    end as VALOR
-    from PLANTILLA
-"""
+sqlturnos = "select distinct TURNO from PLANTILLA"
 cursor = connection.cursor()
 cursor.execute(sqlturnos)
 contador = 1
@@ -23,14 +16,14 @@ contador = 1
 # Por eso guardo los oficios en una lista que puedo usar cuando quiera
 listaturnos = []
 for row in cursor:
+    print(f"{contador} - {row[0]}")
     listaturnos.append(row[0])
-    print(f"{contador} - {row[1]}")
     contador = contador + 1
 cursor.close()
 
 print("Introduzca un turno")
-opcion = int(input()) - 1
-turno = listaturnos[opcion]
+opcion = int(input())
+turno = listaturnos[opcion - 1]
 
 sqlplant = "select * from PLANTILLA where TURNO=:parametro1" 
 cursor = connection.cursor()
@@ -39,5 +32,4 @@ for row in cursor:    # para chequear que funciona
     print (row)
 cursor.close()
 connection.close()
-
 print("Fin de programa")
