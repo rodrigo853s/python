@@ -9,7 +9,7 @@ print("Incremento Salario:")
 connection = oracledb.connect(user='SYSTEM', password='oracle', dsn='localhost/xe')
 
 print("Introduzca CÓDIGO DE HOSPITAL:")
-hospital = input()
+hospital = int(input())
 print("Introduzca INCREMENTO:")
 incremento = int(input())
 
@@ -18,18 +18,19 @@ incremento = int(input())
 sqlupdate  = "update PLANTILLA set SALARIO = SALARIO + :p1 where HOSPITAL_COD=:p2" 
 
 cursor = connection.cursor()
-cursor.execute(sqlupdate, (incremento, hospital)) 
+cursor.execute(sqlupdate, (incremento, hospital)) # Orden de los parámetros en nuestro sqlupdate, a los
+                                                  # que va a sustituir de izq a der
 # CONSULTA DE ACCION; DEVUELVE REGISTROS AFECTADOS
 registros = cursor.rowcount
-# ALMACENAMOS EN BBDD
+print(f"Usuarios incrementados: {registros}")
 connection.commit()
 # CERRAMOS EL CURSOR
 cursor.close()
-print(f"Usuarios incrementados: {registros}")
+
 # AHORA PINTAMOS LOS REGISTROS QUE QUEREMOS
 # ABRIMOS OTRO CURSOR
 cursor = connection.cursor()
-sqlselect = "select APELLIDO, FUNCION, SALARIO from PLANTILLA where HOSPITAL_COD=:p2"
+sqlselect = "select APELLIDO, FUNCION, SALARIO from PLANTILLA where HOSPITAL_COD=:param1"
 cursor.execute(sqlselect,(hospital,))
 for ape, fun, sal in cursor:
     print(f"Apellido:{ape}, Función: {fun}, Salario:{sal}")
