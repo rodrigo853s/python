@@ -11,6 +11,7 @@ class ConexionOracleEnfermos:
         sql = "delete from ENFERMO where INSCRIPCION=:p1"
         cursor.execute(sql, (inscripcion,))
         registros = cursor.rowcount
+        self.connection.commit()
         cursor.close()
         return registros
     
@@ -21,5 +22,6 @@ class ConexionOracleEnfermos:
         cursor = self.connection.cursor()
         cursor.execute(sql, (apellido, inscripcion))
         registros = cursor.rowcount
+        self.connection.commit()
         cursor.close()
         return registros

@@ -14,7 +14,7 @@ if (opcion == 1):
 else:
     print("Nuevo Apellido?")
     apellido = input()
-    connection = modificarApellido()
+    connection = ConexionOracleEnfermos()
     modificados = connection.modificarApellido(apellido, inscripcion)
     print(f"Enfermos modificados: {modificados}")
 print("Fin de programa")
